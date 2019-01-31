@@ -1,0 +1,36 @@
+doctype html
+html
+  head
+    title Blog!
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css", integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS", crossorigin="anonymous")
+    script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js', integrity='sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut', crossorigin='anonymous')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js', integrity='sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k', crossorigin='anonymous')
+
+  body.container
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-info
+      a.navbar-brand(href='/') Blog!
+      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      #navbarContent.collapse.navbar-collapse
+        ul.navbar-nav.mr-auto
+          li.nav-item
+            a.nav-link(href='/')
+              | Home
+          if isLoggedIn
+              li.nav-item
+                a.nav-link(href='/createblog') Create Blog
+              li.nav-item
+                a.nav-link(href='/users/logout') Logout
+          else
+              li.nav-item
+                a.nav-link(href='/users/login') Login 
+              li.nav-item
+                a.nav-link(href='/users/signup') Sign Up
+
+  if message
+    br
+    .alert.alert-primary(role="alert")
+      = message
+  block content

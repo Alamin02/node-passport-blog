@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    .container
+        h2.page-header Signup page
+
+        form(action="/users/signup", method="post")
+            .form-group
+                label(for="username") User Name:
+                input.form-control#username(type="text", name="username", placeholder="Pick a Username", required)
+            .form-group
+                label(for="password") Password:
+                input.form-control#password(type="password", name="password", placeholder="Choose Password", required)
+            .form-group
+                label(for="Radio") Your Role
+                .form-check
+                    input.form-check-input(type="radio", name="role", id="option1", value="admin")
+                    label.form-check-label(for="option1") Admin
+                .form-check
+                    input.form-check-input(type="radio", name="role", id="option2", value="agent")
+                    label.form-check-label(for="option2") Agent
+                .form-check
+                    input.form-check-input(type="radio", name="role", id="option3", value="user", checked)
+                    label.form-check-label(for="option1") User
+            .form-group
+                input.btn.btn-primary(type="submit", value="Signup")

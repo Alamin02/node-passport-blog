@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    .container
+        h2.page-header Login page
+
+        form(action="/users/login", method="post")
+            .form-group
+                label(for="username") User Name:
+                input.form-control#username(type="text", name="username", placeholder="Enter Username", required)
+            .form-group
+                label(for="password") Password:
+                input.form-control#password(type="password", name="password", placeholder="Enter Password", required)
+            
+            input.btn.btn-primary(type="submit", value="Login")
+
+        

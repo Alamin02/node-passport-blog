@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    .container.page-contents
+        each post in posts
+            h3
+                a(href="/post/"+post._id)
+                    = post.title
+            -
+                let text = post.post
+                let splitted_text = text.split(" ")
+                let word_count = splitted_text.length
+                if(word_count > 100){
+                    let first_hundred_words = splitted_text.slice(0, 100) 
+                    text = first_hundred_words.join(" ") + "..."
+                } 
+            p= text
