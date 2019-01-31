@@ -4,14 +4,17 @@ var passport = require('passport');
 
 var User = require('../models/user');
 
+// Get /user page, if someone try in case
 router.get('/', function(req, res, next) {
     res.send('This page is yet to implement');
 });
 
+// Get Login page
 router.get('/login', function(req, res, next) {
     res.render('login', { message: req.query.m });
 });
 
+// Handle Login request with passport
 router.post(
     '/login',
     passport.authenticate('local', {
@@ -22,15 +25,18 @@ router.post(
     })
 );
 
+// Logout and redirect to home
 router.get('/logout', function(req, res, next) {
     req.logOut();
     return res.redirect('/?m=' + encodeURIComponent('You Have Looged Out!'));
 });
 
+// Get Signup page
 router.get('/signup', function(req, res, next) {
     res.render('signup');
 });
 
+// Handle Signup request
 router.post('/signup', function(req, res, next) {
     var username = req.body.username;
 

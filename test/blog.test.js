@@ -4,20 +4,54 @@ const request = require('supertest');
 const app = require('../app');
 
 describe('Unit testing the / route', function() {
-    it('Should return OK status if / is found', function() {
-        return request(app)
-            .get('/')
-            .then(function(response) {
-                assert.equal(response.status, 200);
-            });
+    describe('Unit Testing Home page', function() {
+        it('Should return OK status if / is found', function() {
+            return request(app)
+                .get('/')
+                .then(function(response) {
+                    assert.equal(response.status, 200);
+                });
+        });
+
+        it('should contain some text on rendering', function() {
+            return request(app)
+                .get('/')
+                .then(function(response) {
+                    expect(response.text).to.contain('Home');
+                });
+        });
     });
 
-    it('should contain some text on rendering', function() {
-        return request(app)
-            .get('/')
-            .then(function(response) {
-                expect(response.text).to.contain('Home');
-            });
+    describe('Unit testing the Post Description page', function() {
+        it('Should return OK status if /post/:postID is valid', function() {
+            return (
+                request(app)
+                    // Here, the post ID should be valid
+                    .get('/post/5c514ee2b2832a05344c157d')
+                    .then(function(response) {
+                        assert.equal(response.status, 200);
+                    })
+            );
+        });
+
+        it('Should contain "Author" if /post/:postID is valid', function() {
+            return (
+                request(app)
+                    // Here, the post ID should be valid
+                    .get('/post/5c514ee2b2832a05344c157d')
+                    .then(function(response) {
+                        expect(response.text).to.contain('Author');
+                    })
+            );
+        });
+
+        it('Should redirect if /post/:postID is invalid', function() {
+            return request(app)
+                .get('/post/dafjhdjkasfh')
+                .then(function(response) {
+                    assert.equal(response.status, 302);
+                });
+        });
     });
 });
 

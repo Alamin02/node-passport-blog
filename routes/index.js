@@ -31,11 +31,15 @@ router.get('/post/:postID', function(req, res, next) {
     Post.findOne(query, function(err, post) {
         var isLoggedIn = req.user ? true : false;
 
-        res.render('post', {
-            isLoggedIn: isLoggedIn,
-            post: post,
-            message: ''
-        });
+        if (!post) {
+            res.redirect('/?m=' + encodeURIComponent('The url is invalid!'));
+        } else {
+            res.render('post', {
+                isLoggedIn: isLoggedIn,
+                post: post,
+                message: ''
+            });
+        }
     });
 });
 
@@ -72,6 +76,7 @@ router.post('/createblog', function(req, res, next) {
         post: post
     };
 
+    // Save the blog post in the database, then return to home
     Post.createNewPost(newPost, function() {
         res.redirect('/');
     });
