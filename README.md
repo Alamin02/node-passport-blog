@@ -1,6 +1,6 @@
-# node-assignment
+# node-passport-auth
 
-This project meets the following requirements
+This project is a template for NodeJS + Mongodb + Passport authentication system with a simple blog implementation
 
 - SignIn/SignUp
 - Create User (Username, Password with Role(Admin, Agent, User)) 
